@@ -1,5 +1,5 @@
 import {parseAbi} from 'viem';
-import {$,config,abis,state,client,esc,fmt,link,field,form,amount,read,tx,approve,wallet,tokenAbi,wrapForms,start} from '../core.js';
+import {$,config,abis,state,client,esc,fmt,link,field,form,amount,read,tx,approve,wallet,tokenAbi,wrapForms,chainTime,start} from '../core.js';
 const poolFee=config.infrastructure.fee,decimals={BOT:18,WBOT:18,USDT:6};let feeBps=50;
 const routes={'BOT-USDT':{label:'BOT → USDT',in:'BOT',out:'USDT'},'USDT-BOT':{label:'USDT → BOT',in:'USDT',out:'BOT'},'WBOT-USDT':{label:'WBOT → USDT',in:'WBOT',out:'USDT'},'USDT-WBOT':{label:'USDT → WBOT',in:'USDT',out:'WBOT'}};
 const tokenAddress=t=>t==='USDT'?config.infrastructure.USDT:config.infrastructure.WBOT;
@@ -11,7 +11,7 @@ async function quote(key,value){const r=routes[key];if(!r)throw Error('Choose a 
  return {amount:n,fee,out:result[0]};}
 async function swap(f){
  await wallet();const slip=slippage(f.slippage),q=await quote(f.route,f['swap-amount']),r=routes[f.route],c=config.contracts.OpenHoodRouter;
- const min=q.out*BigInt(10000-slip)/10000n,deadline=BigInt(Math.floor(Date.now()/1000)+600),to=state.account;if(min<=0n)throw Error('Quote too small to swap.');
+ const min=q.out*BigInt(10000-slip)/10000n,deadline=BigInt(await chainTime()+600),to=state.account;if(min<=0n)throw Error('Quote too small to swap.');
  if(r.in==='BOT')return tx('OpenHoodRouter','swapExactBOT',[tokenAddress(r.out),poolFee,min,to,deadline],q.amount);
  await approve(tokenAddress(r.in),c,q.amount);
  if(r.out==='BOT')return tx('OpenHoodRouter','swapExactTokensForBOT',[tokenAddress(r.in),poolFee,q.amount,min,to,deadline]);
