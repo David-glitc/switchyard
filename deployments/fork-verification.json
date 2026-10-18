@@ -1,0 +1,10 @@
+{
+  "localOnly": true,
+  "chainId": 677,
+  "checkedAt": "2026-10-18T13:13:53.156Z",
+  "openhood": {
+    "feeBps": "50",
+    "usdtFromBOT": "122608",
+    "flow": "BOT → USDT → BOT and USDT → WBOT through real BDEX; router left empty"
+  }
+}
