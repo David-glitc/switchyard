@@ -1,10 +1,10 @@
 {
   "localOnly": true,
   "chainId": 677,
-  "checkedAt": "2026-10-18T20:24:44.255Z",
-  "openhood": {
+  "checkedAt": "2026-10-18T22:51:29.635Z",
+  "switchyard": {
     "feeBps": "50",
-    "usdtFromBOT": "122553",
+    "usdtFromBOT": "122543",
     "flow": "BOT → USDT → BOT and USDT → WBOT through real BDEX; router left empty"
   }
 }

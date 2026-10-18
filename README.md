@@ -1,18 +1,18 @@
-# OpenHood
+# Switchyard
 
 **Open trading on BOT Chain.** Swap BOT, WBOT and USDT through BDEX with live quotes, a slippage limit and one transparent fee.
 
 **Status:** contracts are tested on a BOT Chain mainnet fork; the mainnet deployment is pending.
 
-- Website and app: https://openhood-botchain.davidopuene8.workers.dev (app at [`/app/`](https://openhood-botchain.davidopuene8.workers.dev/app/))
+- Website and app: https://switchyard-botchain.davidopuene8.workers.dev (app at [`/app/`](https://switchyard-botchain.davidopuene8.workers.dev/app/))
 - Network: BOT Chain mainnet, chain ID 677 · [BOT Chain](https://www.botchain.ai/) · [BOTScan](https://scan.botchain.ai/)
 
-![OpenHood landing page](docs/openhood-landing-1280.png)
+![Switchyard landing page](docs/switchyard-landing-1280.png)
 
 ## How it works
 
 1. **Pick a route.** BOT, WBOT or USDT in either direction through the BDEX USDT/WBOT pool.
-2. **See the real quote.** The BDEX QuoterV2 prices your trade live, with the OpenHood fee already taken out.
+2. **See the real quote.** The BDEX QuoterV2 prices your trade live, with the Switchyard fee already taken out.
 3. **Swap in one transaction.** Your minimum output and a 10-minute deadline travel with the swap. Native BOT wraps and unwraps automatically.
 
 ## Features
@@ -26,7 +26,7 @@
 
 | Contract | BOT Chain mainnet |
 |---|---|
-| `OpenHoodRouter` | Pending mainnet deployment |
+| `SwitchyardRouter` | Pending mainnet deployment |
 
 BOT Chain infrastructure used: USDT `0xaBabc7Ddc03e501d190C676BF3d92ef0e6e87a3C`, WBOT `0xD5452816194a3784dBa983426cCe7c122F4abd30`, BDEX router `0x07032d47A1b9f8460cBeE9dC17c1d3E438693929`, BDEX QuoterV2 `0x034A705b36067cff99ABf5C662Be881cBd8d0176`.
 
@@ -37,15 +37,15 @@ Source: [`contracts/src`](contracts/src). Tests: [`contracts/test`](contracts/te
 Requires Node 20+, [Foundry](https://getfoundry.sh) and Python 3.
 
 ```bash
-git clone --recursive https://github.com/David-glitc/openhood.git
-cd openhood
+git clone --recursive https://github.com/David-glitc/switchyard.git
+cd switchyard
 npm ci
 npm test              # forge test
-npm run build         # landing page + app into dist/openhood
+npm run build         # landing page + app into dist/switchyard
 npm run preview       # http://127.0.0.1:8771
 ```
 
-`npm run build` writes `dist/openhood/index.html` (landing page), `dist/openhood/app/` (the dApp) and a Cloudflare Workers bundle under `sites/`.
+`npm run build` writes `dist/switchyard/index.html` (landing page), `dist/switchyard/app/` (the dApp) and a Cloudflare Workers bundle under `sites/`.
 
 ### Wallets
 

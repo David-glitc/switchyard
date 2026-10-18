@@ -1,2 +1,2 @@
-import openhood from './openhood.mjs';
-export default [openhood];
+import switchyard from './switchyard.mjs';
+export default [switchyard];

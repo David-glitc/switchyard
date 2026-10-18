@@ -7,9 +7,9 @@ import {IBotV3Router} from "./interfaces/IBotV3Router.sol";
 
 interface IWBOT {function deposit() external payable; function withdraw(uint256) external;}
 
-/// @notice OpenHood's fee router ported to BDEX on BOT Chain. Takes a capped input fee, then swaps through one V3 pool.
+/// @notice Switchyard's fee router ported to BDEX on BOT Chain. Takes a capped input fee, then swaps through one V3 pool.
 /// @dev Holds no user balances between calls. Native BOT legs are wrapped and unwrapped here, so no router multicall is needed.
-contract OpenHoodRouter is ReentrancyGuard {
+contract SwitchyardRouter is ReentrancyGuard {
     using SafeERC20 for IERC20;
     uint16 public constant MAX_FEE_BPS = 500;
     address public immutable router;

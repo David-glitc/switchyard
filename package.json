@@ -1,5 +1,5 @@
 {
-  "name": "openhood",
+  "name": "switchyard",
   "private": true,
   "type": "module",
   "scripts": {
@@ -23,6 +23,6 @@
   },
   "description": "Swap BOT, WBOT and USDT through BDEX with live quotes, a slippage limit and one transparent fee.",
   "license": "MIT",
-  "repository": "https://github.com/David-glitc/openhood",
-  "homepage": "https://openhood-botchain.davidopuene8.workers.dev"
+  "repository": "https://github.com/David-glitc/switchyard",
+  "homepage": "https://switchyard-botchain.davidopuene8.workers.dev"
 }

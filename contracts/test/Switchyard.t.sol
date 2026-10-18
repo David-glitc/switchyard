@@ -3,7 +3,7 @@ pragma solidity ^0.8.24;
 import {Test} from "forge-std/Test.sol";
 import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import {OpenHoodRouter} from "../src/OpenHoodRouter.sol";
+import {SwitchyardRouter} from "../src/SwitchyardRouter.sol";
 import {IBotV3Router} from "../src/interfaces/IBotV3Router.sol";
 
 contract Token is ERC20 {constructor(string memory s) ERC20(s,s){} function mint(address a,uint256 n) external {_mint(a,n);}}
@@ -22,24 +22,24 @@ contract FixedRouter is IBotV3Router {
     }
 }
 
-contract OpenHoodTest is Test {
+contract SwitchyardTest is Test {
     address alice=address(0xA11CE);address fees=address(0xFEE);
-    Token usdt;WrappedBOT wbot;FixedRouter dex;OpenHoodRouter hood;
+    Token usdt;WrappedBOT wbot;FixedRouter dex;SwitchyardRouter hood;
     function setUp() public {
         usdt=new Token("USDT");wbot=new WrappedBOT();dex=new FixedRouter();
-        hood=new OpenHoodRouter(address(dex),address(wbot),fees,50);
+        hood=new SwitchyardRouter(address(dex),address(wbot),fees,50);
         usdt.mint(address(dex),1e30);vm.deal(address(this),1e30);wbot.deposit{value:1e24}();wbot.transfer(address(dex),1e24);
         vm.deal(alice,100 ether);usdt.mint(alice,1000e6);
     }
     function test_nativeInTakesFeeInWbotAndPaysRecipient() public {
-        vm.expectEmit(address(hood));emit OpenHoodRouter.Swapped(alice,address(0),address(usdt),1 ether,0.005 ether,0.995 ether*2,alice);
+        vm.expectEmit(address(hood));emit SwitchyardRouter.Swapped(alice,address(0),address(usdt),1 ether,0.005 ether,0.995 ether*2,alice);
         vm.prank(alice);uint256 out=hood.swapExactBOT{value:1 ether}(address(usdt),3000,1,alice,block.timestamp);
         assertEq(wbot.balanceOf(fees),0.005 ether);assertEq(out,0.995 ether*2);assertEq(usdt.balanceOf(alice),1000e6+out);
         assertEq(dex.lastFee(),3000);_assertEmpty();
     }
     function test_tokenToNativeUnwrapsToRecipient() public {
         vm.startPrank(alice);usdt.approve(address(hood),100e6);
-        vm.expectEmit(address(hood));emit OpenHoodRouter.Swapped(alice,address(usdt),address(0),100e6,0.5e6,99.5e6*2,alice);
+        vm.expectEmit(address(hood));emit SwitchyardRouter.Swapped(alice,address(usdt),address(0),100e6,0.5e6,99.5e6*2,alice);
         uint256 before=alice.balance;uint256 out=hood.swapExactTokensForBOT(address(usdt),3000,100e6,1,payable(alice),block.timestamp);vm.stopPrank();
         assertEq(usdt.balanceOf(fees),0.5e6);assertEq(alice.balance-before,out);assertEq(out,99.5e6*2);_assertEmpty();
     }
@@ -62,7 +62,7 @@ contract OpenHoodTest is Test {
         hood.setFeeConfig(fees,0);vm.prank(alice);uint256 out=hood.swapExactBOT{value:1 ether}(address(usdt),3000,1,alice,block.timestamp);assertEq(out,2 ether);
         hood.transferOwnership(alice);vm.expectRevert(bytes("not owner"));hood.setFeeConfig(fees,10);
         vm.prank(alice);(bool ok,)=address(hood).call{value:1}("");assertFalse(ok);
-        vm.expectRevert(bytes("invalid fee"));new OpenHoodRouter(address(dex),address(wbot),fees,501);
+        vm.expectRevert(bytes("invalid fee"));new SwitchyardRouter(address(dex),address(wbot),fees,501);
     }
     function _assertEmpty() private view {
         assertEq(usdt.balanceOf(address(hood)),0);assertEq(wbot.balanceOf(address(hood)),0);assertEq(address(hood).balance,0);
