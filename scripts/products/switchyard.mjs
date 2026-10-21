@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {parseEther,parseAbi} from 'viem';
 const quoter=parseAbi(['function quoteExactInputSingle((address tokenIn,address tokenOut,uint256 amountIn,uint24 fee,uint160 sqrtPriceLimitX96)) returns(uint256,uint160,uint32,uint256)']);
 export default {
- slug:'switchyard',name:'Switchyard',repo:'switchyard',contract:'SwitchyardRouter',color:'#7cf0ff',eyebrow:'OPEN TRADING',symbol:'↔',
+ slug:'switchyard',vercel:'switchyardbot',assets:['BOT','WBOT','USDT','BDEX','QUOTER'],name:'Switchyard',repo:'switchyard',contract:'SwitchyardRouter',color:'#7cf0ff',eyebrow:'OPEN TRADING',symbol:'↔',
  line:'Open trading on BOT Chain.',
  description:'Swap BOT, WBOT and USDT through BDEX with live quotes, a slippage limit and one transparent fee.',
  abis:['SwitchyardRouter'],

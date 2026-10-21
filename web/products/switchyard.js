@@ -1,5 +1,5 @@
 import {parseAbi} from 'viem';
-import {$,config,abis,state,client,esc,fmt,link,field,form,amount,read,tx,approve,wallet,tokenAbi,wrapForms,chainTime,start} from '../core.js';
+import {$,config,abis,state,client,esc,fmt,link,field,form,amount,read,tx,approve,wallet,tokenAbi,wrapForms,chainTime,asset,start} from '../core.js';
 const poolFee=config.infrastructure.fee,decimals={BOT:18,WBOT:18,USDT:6};let feeBps=50;
 const routes={'BOT-USDT':{label:'BOT → USDT',in:'BOT',out:'USDT'},'USDT-BOT':{label:'USDT → BOT',in:'USDT',out:'BOT'},'WBOT-USDT':{label:'WBOT → USDT',in:'WBOT',out:'USDT'},'USDT-WBOT':{label:'USDT → WBOT',in:'USDT',out:'WBOT'}};
 const tokenAddress=t=>t==='USDT'?config.infrastructure.USDT:config.infrastructure.WBOT;
@@ -27,12 +27,12 @@ function controls(){
 }
 async function render(){
  const [botPrice,usdtPrice]=await Promise.all([quote('BOT-USDT','1'),quote('USDT-BOT','1')]);
- let html=`<div class="row"><span>1 BOT</span><strong>≈ ${trim(fmt(botPrice.out,6))} USDT</strong></div><div class="row"><span>1 USDT</span><strong>≈ ${trim(fmt(usdtPrice.out))} BOT</strong></div><div class="row"><span>Switchyard fee</span><strong>${(feeBps/100).toFixed(2)}%</strong></div><p class="tiny">Quotes include the Switchyard fee and BDEX's 0.3% pool fee.</p>`;
- if(state.account){const [bot,wb,usd]=await Promise.all([client.getBalance({address:state.account}),...['WBOT','USDT'].map(t=>client.readContract({address:tokenAddress(t),abi:tokenAbi,functionName:'balanceOf',args:[state.account]}))]);html+=`<h3>Your wallet</h3><div class="row"><span>BOT</span><strong>${trim(fmt(bot))}</strong></div><div class="row"><span>WBOT</span><strong>${trim(fmt(wb))}</strong></div><div class="row"><span>USDT</span><strong>${trim(fmt(usd,6))}</strong></div>`;}
+ let html=`<div class="row"><span>1 ${asset('BOT')}</span><strong>≈ ${trim(fmt(botPrice.out,6))} ${asset('USDT')}</strong></div><div class="row"><span>1 ${asset('USDT')}</span><strong>≈ ${trim(fmt(usdtPrice.out))} ${asset('BOT')}</strong></div><div class="row"><span>Switchyard fee</span><strong>${(feeBps/100).toFixed(2)}%</strong></div><p class="tiny">Quotes include the Switchyard fee and the <a href="https://scan.botchain.ai/address/${config.infrastructure.router}" target="_blank" rel="noopener noreferrer">BDEX</a> 0.3% pool fee.</p>`;
+ if(state.account){const [bot,wb,usd]=await Promise.all([client.getBalance({address:state.account}),...['WBOT','USDT'].map(t=>client.readContract({address:tokenAddress(t),abi:tokenAbi,functionName:'balanceOf',args:[state.account]}))]);html+=`<h3>Your wallet</h3><div class="row"><span>${asset('BOT')}</span><strong>${trim(fmt(bot))}</strong></div><div class="row"><span>${asset('WBOT')}</span><strong>${trim(fmt(wb))}</strong></div><div class="row"><span>${asset('USDT')}</span><strong>${trim(fmt(usd,6))}</strong></div>`;}
  html+='<h3>Recent Switchyard swaps</h3>';
  try{const latest=await client.getBlockNumber();const logs=(await client.getContractEvents({address:config.contracts.SwitchyardRouter,abi:abis.SwitchyardRouter,eventName:'Swapped',fromBlock:latest>5000n?latest-5000n:0n,toBlock:latest})).slice(-15).reverse();
   const sym=a=>/^0x0{40}$/i.test(a)?'BOT':a.toLowerCase()===config.infrastructure.USDT.toLowerCase()?'USDT':'WBOT';
-  html+=logs.map(l=>{const a=l.args,i=sym(a.tokenIn),o=sym(a.tokenOut);return `<div class="row"><span>${link(a.sender)} · <a href="https://scan.botchain.ai/tx/${esc(l.transactionHash)}" target="_blank" rel="noopener noreferrer">tx</a></span><strong>${trim(fmt(a.amountIn,decimals[i]))} ${i} → ${trim(fmt(a.amountOut,decimals[o]))} ${o}</strong></div>`;}).join('')||'<p class="tiny">No swaps in the last 5,000 blocks.</p>';}
+  html+=logs.map(l=>{const a=l.args,i=sym(a.tokenIn),o=sym(a.tokenOut);return `<div class="row"><span>${link(a.sender)} · <a href="https://scan.botchain.ai/tx/${esc(l.transactionHash)}" target="_blank" rel="noopener noreferrer">tx</a></span><strong>${trim(fmt(a.amountIn,decimals[i]))} ${asset(i)} → ${trim(fmt(a.amountOut,decimals[o]))} ${asset(o)}</strong></div>`;}).join('')||'<p class="tiny">No swaps in the last 5,000 blocks.</p>';}
  catch{html+='<p class="tiny">Swap history is unavailable from this RPC right now.</p>';}
  return html;
 }
