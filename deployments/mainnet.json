@@ -1,0 +1,42 @@
+{
+  "chainId": 677,
+  "network": "mainnet",
+  "deployer": "0x766d0d810eCF822e02df47CDb5A389777f291895",
+  "local": false,
+  "contracts": {
+    "SwitchyardRouter": "0xf341aba372263b7d5f038c4f8df2e0b96a48e11a"
+  },
+  "actions": {
+    "deploy:SwitchyardRouter": {
+      "hash": "0x0c2328a4ba75d078b2bf4d74b1ae9705f82815f25f3dc3d63b07ee85b99465be",
+      "receipt": {
+        "transactionHash": "0x0c2328a4ba75d078b2bf4d74b1ae9705f82815f25f3dc3d63b07ee85b99465be",
+        "contractAddress": "0xf341aba372263b7d5f038c4f8df2e0b96a48e11a",
+        "blockNumber": "27571972",
+        "gasUsed": "1000666",
+        "gasPrice": "20000000000"
+      }
+    }
+  },
+  "gasSpentWei": "284775900000000000",
+  "ready": true,
+  "infrastructure": {
+    "USDT": "0xaBabc7Ddc03e501d190C676BF3d92ef0e6e87a3C",
+    "WBOT": "0xD5452816194a3784dBa983426cCe7c122F4abd30",
+    "router": "0x07032d47A1b9f8460cBeE9dC17c1d3E438693929",
+    "quoter": "0x034A705b36067cff99ABf5C662Be881cBd8d0176",
+    "fee": 3000
+  },
+  "launched": {
+    "switchyard": "2026-10-22T10:03:27.232Z"
+  },
+  "sourceHashes": {
+    "SwitchyardRouter": "0x381b1f006d99312b66bbacf116862450c616b143f1f2864e83ce06ff6d34a9bf"
+  },
+  "records": {
+    "hedgerowReferenceBasket": {
+      "vault": "0x94B8d2f320b4E96Fb3FA5c040E8F272B18fC31A9",
+      "tx": "0x2c24e6e1a4f01297f0ea0106be58b14c75698f0625fd45597887c83316707e21"
+    }
+  }
+}
