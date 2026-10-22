@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap');
+/* Switchyard: rail signage at night. Dark steel, signal amber, condensed caps, departure-board numbers. */
+:root{--scheme:dark;--bg:#111315;--surface:#191C1F;--surface-2:#22262A;--input-bg:#0D0F11;--tile:#22262A;
+ --ink:#ECEAE4;--ink-2:#A7A69F;--line:#2E3338;--line-strong:#646B73;
+ --accent:#F2A93B;--accent-hover:#F7BC5E;--accent-ink:#1A1205;--accent-text:#F2A93B;--link:#F4C474;--focus:#5FC7D9;
+ --danger:#E5634D;--danger-bg:#2A1714;--danger-text:#F28C78;--scrim:rgba(0,0,0,.65);
+ --radius-sm:0;--radius-md:0;--radius-lg:2px;--radius-btn:0;--radius-pill:2px;--border-w:1px;
+ --shadow-1:none;--shadow-2:0 24px 60px rgba(0,0,0,.6);--shadow-btn:none;
+ --font-display:'Barlow Condensed','Arial Narrow',sans-serif;--font-body:'Barlow',system-ui,sans-serif;--font-label:'Barlow Condensed','Arial Narrow',sans-serif;--font-mono:'JetBrains Mono',ui-monospace,monospace;
+ --display-weight:700;--display-tracking:.01em;--display-case:uppercase;--label-tracking:.18em}
+/* Signal strip, departure-board steps, mono figures. */
+body:before{content:'';display:block;height:6px;background:repeating-linear-gradient(-45deg,var(--accent) 0 14px,var(--bg) 14px 28px)}
+h1{font-size:clamp(2.8rem,6vw,5rem);max-width:12ch}
+button,a.button{text-transform:uppercase;letter-spacing:.08em;font-family:var(--font-label);font-size:1rem}
+.steps{gap:2px;background:var(--line)}
+.steps li{border:0;background:var(--surface);border-radius:0}
+.steps li:before{display:inline-block;padding:4px 8px;background:var(--bg);border:1px solid var(--line-strong);font-size:1.1rem;color:var(--accent-text)}
+.features div{border-left:4px solid var(--accent)}
+.facts dd,.amount,.row strong,.contract a{font-family:var(--font-mono)}
+.launch{border-left:6px solid var(--accent)}
+.launch.pending{border-left-color:var(--line-strong)}
+.panel{border-top:3px solid var(--accent)}
+.cta-band{border-left:6px solid var(--accent)}
