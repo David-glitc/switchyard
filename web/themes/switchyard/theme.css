@@ -1,17 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap');
-/* Switchyard: rail signage at night. Dark steel, signal amber, condensed caps, departure-board numbers. */
-:root{--scheme:dark;--bg:#111315;--surface:#191C1F;--surface-2:#22262A;--input-bg:#0D0F11;--tile:#22262A;
- --ink:#ECEAE4;--ink-2:#A7A69F;--line:#2E3338;--line-strong:#646B73;
- --accent:#F2A93B;--accent-hover:#F7BC5E;--accent-ink:#1A1205;--accent-text:#F2A93B;--link:#F4C474;--focus:#5FC7D9;
- --danger:#E5634D;--danger-bg:#2A1714;--danger-text:#F28C78;--scrim:rgba(0,0,0,.65);
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap');
+/* Switchyard: a rail yard at night. Steel black, signal amber and cyan lamps, condensed caps, departure boards. */
+:root{--scheme:dark;--bg:#0C0E10;--surface:#15181B;--surface-2:#1E2226;--input-bg:#090B0C;--tile:#1E2226;
+ --ink:#EFEDE7;--ink-2:#A9A8A1;--line:#2A2F34;--line-strong:#646B73;
+ --accent:#F2A93B;--accent-hover:#F7BC5E;--accent-ink:#1A1205;--accent-text:#F4B04A;--link:#F4C474;--focus:#5FD3E6;
+ --danger:#E5634D;--danger-bg:#2A1714;--danger-text:#F28C78;--scrim:rgba(0,0,0,.7);
  --radius-sm:0;--radius-md:0;--radius-lg:2px;--radius-btn:0;--radius-pill:2px;--border-w:1px;
- --shadow-1:none;--shadow-2:0 24px 60px rgba(0,0,0,.6);--shadow-btn:none;
+ --shadow-1:none;--shadow-2:0 24px 60px rgba(0,0,0,.65);--shadow-btn:none;
  --font-display:'Barlow Condensed','Arial Narrow',sans-serif;--font-body:'Barlow',system-ui,sans-serif;--font-label:'Barlow Condensed','Arial Narrow',sans-serif;--font-mono:'JetBrains Mono',ui-monospace,monospace;
- --display-weight:700;--display-tracking:.01em;--display-case:uppercase;--label-tracking:.18em}
-/* Signal strip, departure-board steps, mono figures. */
+ --display-weight:800;--display-tracking:.005em;--display-case:uppercase;--label-tracking:.2em;
+ --hero-bg:radial-gradient(50% 55% at 80% 35%,rgba(242,169,59,.30),transparent 70%),radial-gradient(35% 40% at 20% 90%,rgba(95,211,230,.16),transparent 70%),linear-gradient(180deg,#0C0E10 0%,#101316 100%);
+ --hero-pattern:linear-gradient(rgba(239,237,231,.10) 1px,transparent 1px),linear-gradient(90deg,rgba(239,237,231,.10) 1px,transparent 1px);--hero-pattern-size:64px 64px;--hero-pattern-opacity:.8;
+ --chip-bg:rgba(21,24,27,.8);--live:#5FD3E6;--live-ring:rgba(95,211,230,.25);--art-glow:radial-gradient(circle,rgba(242,169,59,.55),rgba(95,211,230,.18) 55%,transparent 72%);--ticker-bg:#F2A93B}
+/* Hazard strip, amber ticker band, departure-board steps, mono figures. */
 body:before{content:'';display:block;height:6px;background:repeating-linear-gradient(-45deg,var(--accent) 0 14px,var(--bg) 14px 28px)}
-h1{font-size:clamp(2.8rem,6vw,5rem);max-width:12ch}
-button,a.button{text-transform:uppercase;letter-spacing:.08em;font-family:var(--font-label);font-size:1rem}
+h1{font-size:clamp(3.2rem,8vw,6.8rem);max-width:11ch;line-height:.92}
+button,a.button{text-transform:uppercase;letter-spacing:.1em;font-family:var(--font-label);font-size:1rem}
+.ticker{border:0}
+.ticker span{color:var(--accent-ink)}
+.ticker span:after{background:var(--accent-ink)}
 .steps{gap:2px;background:var(--line)}
 .steps li{border:0;background:var(--surface);border-radius:0}
 .steps li:before{display:inline-block;padding:4px 8px;background:var(--bg);border:1px solid var(--line-strong);font-size:1.1rem;color:var(--accent-text)}
@@ -20,4 +26,4 @@ button,a.button{text-transform:uppercase;letter-spacing:.08em;font-family:var(--
 .launch{border-left:6px solid var(--accent)}
 .launch.pending{border-left-color:var(--line-strong)}
 .panel{border-top:3px solid var(--accent)}
-.cta-band{border-left:6px solid var(--accent)}
+.cta-band{border-left:6px solid var(--accent);background:radial-gradient(60% 120% at 90% 0%,rgba(242,169,59,.22),transparent 60%),var(--surface)}
