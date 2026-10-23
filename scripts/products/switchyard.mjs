@@ -4,6 +4,7 @@ const quoter=parseAbi(['function quoteExactInputSingle((address tokenIn,address 
 export default {
  slug:'switchyard',vercel:'switchyardbot',assets:['BOT','WBOT','USDT','BDEX','QUOTER'],name:'Switchyard',repo:'switchyard',contract:'SwitchyardRouter',color:'#7cf0ff',eyebrow:'OPEN TRADING',symbol:'↔',
  line:'Open trading on BOT Chain.',
+ app:{title:'Swap terminal',line:'Live BDEX quotes, one visible fee, your slippage limit on every trade.',layout:'console'},
  description:'Swap BOT, WBOT and USDT through BDEX with live quotes, a slippage limit and one transparent fee.',
  abis:['SwitchyardRouter'],
  contracts:['src/SwitchyardRouter.sol','src/interfaces/IBotV3Router.sol'],tests:['test/Switchyard.t.sol'],
