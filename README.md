@@ -6,6 +6,7 @@
 
 - Website and app: https://switchyardbot.vercel.app (app at [`/app/`](https://switchyardbot.vercel.app/app/))
 - Network: BOT Chain mainnet, chain ID 677 · [BOT Chain](https://www.botchain.ai/) · [BOTScan](https://scan.botchain.ai/)
+- X: [@UseSwitchyard](https://x.com/UseSwitchyard)
 
 ![Switchyard landing page](docs/switchyard-landing-1280.png)
 
